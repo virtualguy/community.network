@@ -114,11 +114,12 @@ def load_config(module, commands, commit=False, comment=None):
     diff = None
     if module._diff:
         out = connection.get('compare')
-        out = to_text(out, errors='surrogate_or_strict')
+        diff = to_text(out, errors='surrogate_or_strict')
 
         if not out.startswith('No changes'):
-            out = connection.get('show')
-            diff = to_text(out, errors='surrogate_or_strict').strip()
+            diff = out.strip()
+            #out = connection.get('show')
+            #diff = to_text(out, errors='surrogate_or_strict').strip()
 
     if commit:
         try:
